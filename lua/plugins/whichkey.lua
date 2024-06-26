@@ -3,31 +3,9 @@ local M = {
 }
 
 function M.config()
-  local mappings = {
-    q = { "<cmd>confirm q<CR>", "Quit" },
-    h = { "<cmd>nohlsearch<CR>", "NOHL" },
-    [";"] = { "<cmd>tabnew | terminal<CR>", "Term" },
-    v = { "<cmd>vsplit<CR>", "Split" },
-    b = { name = "Buffers" },
-    d = { name = "Debug" },
-    f = { name = "Find" },
-    g = { name = "Git" },
-    l = { name = "LSP" },
-    p = { name = "Plugins" },
-    t = { name = "Test" },
-    a = {
-      name = "Tab",
-      n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
-      N = { "<cmd>tabnew %<cr>", "New Tab" },
-      o = { "<cmd>tabonly<cr>", "Only" },
-      h = { "<cmd>-tabmove<cr>", "Move Left" },
-      l = { "<cmd>+tabmove<cr>", "Move Right" },
-    },
-    T = { name = "Treesitter" },
-  }
+  local wk = require "which-key"
 
-  local which_key = require "which-key"
-  which_key.setup {
+  local setup = {
     plugins = {
       marks = true,
       registers = true,
@@ -36,23 +14,23 @@ function M.config()
         suggestions = 20,
       },
       presets = {
-        operators = false,
-        motions = false,
-        text_objects = false,
-        windows = false,
-        nav = false,
-        z = false,
-        g = false,
+        operators = true,
+        motions = true,
+        text_objects = true,
+        windows = true,
+        nav = true,
+        z = true,
+        g = true,
       },
     },
     window = {
-      border = "rounded",
+      border = "none",
       position = "bottom",
       padding = { 2, 2, 2, 2 },
     },
     ignore_missing = true,
     show_help = false,
-    show_keys = false,
+    show_keys = true,
     disable = {
       buftypes = {},
       filetypes = { "TelescopePrompt" },
@@ -60,11 +38,49 @@ function M.config()
   }
 
   local opts = {
-    mode = "n", -- NORMAL mode
+    mode = "n",
     prefix = "<leader>",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  }
+  local mappings = {
+    b = {
+      name = "Buffers",
+      ['1'] = {'<cmd>bn<cr>','spc + bn -> buf next'},
+      ['2'] = {'<cmd>bp<cr>','spc + bp -> buf prev'},
+      ['3'] = {'<cmd>b<cr>','spc + b -> buf next'},
+      ['4'] = {'<cmd>p<cr>','spc + p -> buf next'},
+      ['5'] = {"<cmd>buffers<CR>:buffer<Space>",'spc + bl -> buf selct'},
+    },
+
+    f = { name = "Find" },
+    s = { name = "LSP" },
+    j = {'spc + j -> first word'},
+    l = {'spc + l -> last word'},
+
+    q = {
+      name = "Qiuuu",
+     q = { "<cmd>confirm q<CR>", "Quit" },
+     ['1'] = {"<cmd>bdelete<cr>","shift + q -> del buffer"}
+    },
+
+    h = { "<cmd>nohlsearch<CR>", "NOHL" },
+
+    --group, isi gen yiyang de content
+    t = {
+      name = "Tab",
+      n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
+      N = { "<cmd>tabnew %<cr>", "New Tab" },
+      o = { "<cmd>tabonly<cr>", "Only" },
+      h = { "<cmd>-tabmove<cr>", "Move Left" },
+      l = { "<cmd>+tabmove<cr>", "Move Right" },
+    },
   }
 
-  which_key.register(mappings, opts)
+  wk.setup(setup)
+  wk.register(mappings,opts)
 end
 
 return M
