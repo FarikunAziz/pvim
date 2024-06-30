@@ -48,22 +48,22 @@ function M.config()
   local mappings = {
     b = {
       name = "Buffers",
-      ['1'] = {'<cmd>bn<cr>','spc + bn -> buf next'},
-      ['2'] = {'<cmd>bp<cr>','spc + bp -> buf prev'},
-      ['3'] = {'<cmd>b<cr>','spc + b -> buf next'},
-      ['4'] = {'<cmd>p<cr>','spc + p -> buf next'},
-      ['5'] = {"<cmd>buffers<CR>:buffer<Space>",'spc + bl -> buf selct'},
+      ['1'] = {'<cmd>bn<cr>','spc + bn = buf next'},
+      ['2'] = {'<cmd>bp<cr>','spc + bp = buf prev'},
+      ['3'] = {'<cmd>b<cr>','spc + b = buf next'},
+      ['4'] = {'<cmd>p<cr>','spc + p = buf next'},
+      ['5'] = {"<cmd>buffers<CR>:buffer<Space>",'spc + bl = buf selct'},
     },
 
     f = { name = "Find" },
     s = { name = "LSP" },
-    j = {'spc + j -> first word'},
-    l = {'spc + l -> last word'},
+    j = {'spc + j = first word'},
+    l = {'spc + l = last word'},
 
     q = {
-      name = "Qiuuu",
+      name = "more",
      q = { "<cmd>confirm q<CR>", "Quit" },
-     ['1'] = {"<cmd>bdelete<cr>","shift + q -> del buffer"}
+     ['1'] = {"<cmd>bdelete<cr>","shift + q = del buffer"}
     },
 
     h = { "<cmd>nohlsearch<CR>", "NOHL" },
@@ -77,6 +77,8 @@ function M.config()
       h = { "<cmd>-tabmove<cr>", "Move Left" },
       l = { "<cmd>+tabmove<cr>", "Move Right" },
     },
+
+    g = {name = "Gitsigns"}
   }
 
   wk.setup(setup)
