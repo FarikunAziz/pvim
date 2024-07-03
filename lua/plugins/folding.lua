@@ -1,5 +1,5 @@
 local M = {
-  'anuvyklack/pretty-fold.nvim',
+  'bbjornstad/pretty-fold.nvim',
    event = "VeryLazy",
 }
 
