@@ -48,10 +48,10 @@ function M.config()
   local mappings = {
     b = {
       name = "Buffers",
-      ['1'] = {'<cmd>bn<cr>','spc + bn = buf next'},
-      ['2'] = {'<cmd>bp<cr>','spc + bp = buf prev'},
-      ['3'] = {'<cmd>b<cr>','spc + b = buf next'},
-      ['4'] = {'<cmd>p<cr>','spc + p = buf next'},
+      ['1'] = {'<cmd>bn<cr>','spc + b = buf next'},
+      ['2'] = {'<cmd>bp<cr>','spc + p = buf prev'},
+      ['3'] = {'Shift + l = buf next'},
+      ['4'] = {'Shift + h = buf prev'},
       ['5'] = {"<cmd>buffers<CR>:buffer<Space>",'spc + bl = buf selct'},
     },
 

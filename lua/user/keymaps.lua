@@ -51,10 +51,10 @@ keymap("i", "jk", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
 
 --switch buffer
-keymap("n", "<leader>bn", ":bn<CR>", opts)
-keymap("n", "<leader>bp", ":bp<CR>", opts)
 keymap("n", "<leader>b", ":bn<CR>", opts)
 keymap("n", "<leader>p", ":bp<CR>", opts)
+keymap("n", "<S-l>", ":bn<CR>", opts)
+keymap("n", "<S-h>", ":bp<CR>", opts)
 --select buffer
 keymap("n", "<leader>bl", ":buffers<CR>:buffer<Space>", opts)
 --quit buffer
@@ -64,7 +64,7 @@ keymap("n","<s-q>",":bdelete<CR>",opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
---teleport end<->start words
+--teleport end <-> start words
 keymap({ "n", "o", "x" }, "<leader>j", "^", opts)
 keymap({ "n", "o", "x" }, "<leader>l", "g_", opts)
 
