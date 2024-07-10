@@ -6,20 +6,6 @@ local M = {
 
 
 function M.config()
-  local colors = {
-    bg       = '#202328',
-    fg       = '#bbc2cf',
-    yellow   = '#ECBE7B',
-    cyan     = '#008080',
-    darkblue = '#081633',
-    green    = '#98be65',
-    orange   = '#FF8800',
-    violet   = '#a9a1e1',
-    magenta  = '#c678dd',
-    blue     = '#51afef',
-    red      = '#ec5f67',
-  }
-
   local conditions = {
     buffer_not_empty = function()
       return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -34,28 +20,41 @@ function M.config()
     end,
   }
 
+  local colors = {
+    '#202328','#bbc2cf','#74512D','#0A6847','#FF0080',
+    '#6C946F','#FFA823','#DC0083','#EB5B00','#E4003A',
+    '#4535C1','#50B498','#FF7EE2','#1A5319','#4A249D',
+    '#009FBD','#FF4191','#E76F51','#37B7C3','#06D001',
+    '#0C1844','#FFDE95','#E88D67','#373A40','#FF0000',
+    '#FAEF5D','#E26EE5','#54B435'
+  }
+
+
   function auto_colors()
+    math.randomseed(os.time())
+    local scorpio = colors[math.random(#colors)]
+
     local mode_color = {
-      n = colors.blue,
-      i = colors.green,
-      v = colors.red,
-      [''] = colors.blue,
-      V = colors.blue,
-      c = colors.magenta,
-      no = colors.red,
-      s = colors.orange,
-      S = colors.orange,
-      [''] = colors.orange,
-      ic = colors.yellow,
-      R = colors.violet,
-      Rv = colors.violet,
-      cv = colors.red,
-      ce = colors.red,
-      r = colors.cyan,
-      rm = colors.cyan,
-      ['r?'] = colors.cyan,
-      ['!'] = colors.red,
-      t = colors.red,
+      n = scorpio,
+      i = scorpio,
+      v = scorpio,
+      [''] = scorpio,
+      V = scorpio,
+      c = scorpio,
+      no = scorpio,
+      s = scorpio,
+      S = scorpio,
+      [''] = scorpio,
+      ic = scorpio,
+      R = scorpio,
+      Rv = scorpio,
+      cv = scorpio,
+      ce = scorpio,
+      r = scorpio,
+      rm = scorpio,
+      ['r?'] = scorpio,
+      ['!'] = scorpio,
+      t = scorpio,
     }
 
     return { fg = mode_color[vim.fn.mode()] }
@@ -70,8 +69,8 @@ function M.config()
         -- We are going to use lualine_c an lualine_x as left and
         -- right section. Both are highlighted by c theme .  So we
         -- are just setting default looks o statusline
-        normal = { c = { fg = colors.fg, bg = colors.bg } },
-        inactive = { c = { fg = colors.fg, bg = colors.bg } },
+        normal = { c = { fg = colors[2], bg = colors[1] } },
+        inactive = { c = { fg = colors[2], bg = colors[1] } },
       },
     },
     sections = {
@@ -109,7 +108,7 @@ function M.config()
     function()
       return '▊'
     end,
-    color = auto_colors,
+    color = {fg = colors[16]},
     padding = { left = 0, right = 1 }, -- We don't need space before this
   }
 
@@ -126,16 +125,16 @@ function M.config()
 
   ins_left { 'location' }
 
-  ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+  ins_left { 'progress', color = { fg = colors[9], gui = 'bold' } }
 
   ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     symbols = { error = ' ', warn = ' ', info = ' ' },
     diagnostics_color = {
-      color_error = { fg = colors.red },
-      color_warn = { fg = colors.yellow },
-      color_info = { fg = colors.cyan },
+      color_error = { fg = colors[25] },
+      color_warn = { fg = colors[9] },
+      color_info = { fg = colors[5] },
     },
   }
 
@@ -152,9 +151,9 @@ function M.config()
     cond = conditions.buffer_not_empty,
     color = function ()
       local mode_color = {
-        n = colors.orange,
-        i = colors.green,
-        v = colors.blue,
+        n = colors[19],
+        i = colors[27],
+        v = colors[3],
       }
       return {fg = mode_color[vim.fn.mode()]}
     end
@@ -174,20 +173,12 @@ function M.config()
     'branch',
     color = function ()
       local mode_color = {
-        n = colors.red,
-        i = colors.violet,
-        v = colors.cyan,
+        n = colors[10],
+        i = colors[28],
+        v = colors[26],
       }
       return {fg = mode_color[vim.fn.mode()]}
     end
-  }
-
-  ins_right {
-    function()
-      return '▊'
-    end,
-    color = auto_colors,
-    padding = { left = 1 },
   }
 
   require('lualine').setup(config)
