@@ -125,7 +125,7 @@ function M.config()
 
   ins_left { 'location' }
 
-  ins_left { 'progress', color = { fg = colors[9], gui = 'bold' } }
+  ins_left { 'progress', color = { fg = colors[26], gui = 'bold' } }
 
   ins_left {
     'diagnostics',
@@ -173,8 +173,8 @@ function M.config()
     'branch',
     color = function ()
       local mode_color = {
-        n = colors[10],
-        i = colors[28],
+        n = colors[28],
+        i = colors[10],
         v = colors[26],
       }
       return {fg = mode_color[vim.fn.mode()]}
