@@ -128,9 +128,9 @@ function M.config()
   ins_left { 'progress',
     color = function ()
       local mode_color = {
-        n = colors[22],
+        n = colors[6],
         i = colors[12],
-        v = colors[23],
+        v = colors[4],
       }
       return {fg = mode_color[vim.fn.mode()], gui = 'bold'}
     end
