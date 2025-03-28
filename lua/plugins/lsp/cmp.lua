@@ -48,7 +48,7 @@ function M.config()
 
   require("luasnip/loaders/from_vscode").lazy_load()
   --my snippets
-  require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/lua/user/snippets"})
+  require("luasnip.loaders.from_lua").load({paths = {"~/.config/nvim/lua/user/snippets/"}})
 
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
   vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
