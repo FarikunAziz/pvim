@@ -27,7 +27,8 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 2
-vim.opt.cursorline = true
+--its slowdown my terminator
+vim.opt.cursorline = false
 
 -- vim.opt.number = true
 vim.opt.laststatus = 4
@@ -52,4 +53,7 @@ vim.opt.list = true
 vim.opt.lazyredraw = true
 vim.opt.hidden = true
 vim.opt.history = 100
-vim.opt.synmaxcol = 240
+vim.opt.synmaxcol = 128
+vim.cmd([[
+  syntax sync minlines=256
+]])
