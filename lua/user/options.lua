@@ -30,7 +30,7 @@ vim.opt.tabstop = 2
 --its slowdown my terminator
 vim.opt.cursorline = false
 
--- vim.opt.number = true
+vim.opt.number = true
 vim.opt.laststatus = 4
 vim.opt.showcmd = false
 vim.opt.ruler = false
