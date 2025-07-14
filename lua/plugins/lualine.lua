@@ -115,7 +115,7 @@ function M.config()
   ins_left {
     -- mode component
     function()
-      return ''
+      return ''
     end,
     color = auto_colors,
     padding = { right = 1 },
