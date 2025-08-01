@@ -29,37 +29,6 @@ function M.config()
     '#FAEF5D','#E26EE5','#54B435'
   }
 
-
-  function auto_colors()
-    math.randomseed(os.time())
-    local scorpio = colors[math.random(#colors)]
-
-    local mode_color = {
-      n = scorpio,
-      i = scorpio,
-      v = scorpio,
-      [''] = scorpio,
-      V = scorpio,
-      c = scorpio,
-      no = scorpio,
-      s = scorpio,
-      S = scorpio,
-      [''] = scorpio,
-      ic = scorpio,
-      R = scorpio,
-      Rv = scorpio,
-      cv = scorpio,
-      ce = scorpio,
-      r = scorpio,
-      rm = scorpio,
-      ['r?'] = scorpio,
-      ['!'] = scorpio,
-      t = scorpio,
-    }
-
-    return { fg = mode_color[vim.fn.mode()] }
-  end
-
   local config = {
     options = {
       -- Disable sections and component separators
@@ -117,7 +86,6 @@ function M.config()
     function()
       return ''
     end,
-    color = auto_colors,
     padding = { right = 1 },
   }
 
@@ -128,7 +96,7 @@ function M.config()
   ins_left { 'progress',
     color = function ()
       local mode_color = {
-        n = colors[6],
+        n = colors[26],
         i = colors[12],
         v = colors[4],
       }
@@ -139,7 +107,7 @@ function M.config()
   ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '},
     diagnostics_color = {
       color_error = { fg = colors[25] },
       color_warn = { fg = colors[9] },
@@ -182,7 +150,7 @@ function M.config()
     'branch',
     color = function ()
       local mode_color = {
-        n = colors[28],
+        n = colors[20],
         i = colors[10],
         v = colors[26],
       }
