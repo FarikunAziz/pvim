@@ -107,7 +107,7 @@ function M.config()
   ins_left {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
-    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '},
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' '},
     diagnostics_color = {
       color_error = { fg = colors[25] },
       color_warn = { fg = colors[9] },

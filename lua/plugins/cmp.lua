@@ -45,14 +45,15 @@ local M = {
 function M.config()
   local cmp = require "cmp"
   local luasnip = require "luasnip"
+  local s = luasnip.snippet
+  local t = luasnip.text_node
+  local i = luasnip.insert_node
 
-  require("luasnip/loaders/from_vscode").lazy_load()
+  require("luasnip.loaders.from_vscode").lazy_load()
+
   --my snippets
-  require("luasnip.loaders.from_lua").load({paths = {"~/.config/nvim/lua/user/snippets/"}})
-
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
-  vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
+  local my_snip_dir = vim.fn.expand('/home/aziz/.config/nvim/lua/user')
+  require('luasnip.loaders.from_lua').load({ paths = my_snip_dir })
 
   local has_words_before = function()
     unpack = unpack or table.unpack
@@ -63,7 +64,7 @@ function M.config()
   cmp.setup {
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body) -- For `luasnip` users.
+        luasnip.lsp_expand(args.body)
       end,
     },
 
@@ -128,7 +129,6 @@ function M.config()
   },
 
     sources = {
-      { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },

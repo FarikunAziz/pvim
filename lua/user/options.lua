@@ -1,5 +1,5 @@
 vim.opt.backup = false
-vim.opt.clipboard = "unnamedplus"
+vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 vim.opt.cmdheight = 1
 vim.opt.completeopt = { "menuone", "noselect","noinsert"}
 vim.opt.conceallevel = 0
@@ -49,6 +49,7 @@ vim.opt.iskeyword:append "-"
 vim.opt.formatoptions:remove { "c", "r", "o" }
 vim.opt.linebreak = true
 vim.opt.list = true
+vim.opt.winborder = "solid"
 
 vim.opt.lazyredraw = true
 vim.opt.hidden = true

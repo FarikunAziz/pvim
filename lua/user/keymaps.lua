@@ -5,7 +5,7 @@ keymap("n", "<Space>", "", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Better window navigation
+-- loncat antar windows jika split diaktifkan
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
@@ -75,9 +75,6 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>bb", ":Telescope buffers<CR>", opts)
-
--- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)

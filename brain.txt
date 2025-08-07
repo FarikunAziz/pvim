@@ -1,2 +1,0 @@
-#jika kamu ingin berpindah to another nvim config
-NVIM_APPNAME='your nvim config' nvim
