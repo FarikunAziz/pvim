@@ -49,6 +49,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 --fast [ESC
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
+keymap("i", "kk", "<ESC>", opts)
 
 --switch buffer
 keymap("n", "<leader>b", ":bn<CR>", opts)
