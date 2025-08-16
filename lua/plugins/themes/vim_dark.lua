@@ -11,7 +11,7 @@ function ramen()
   --" Activates italicized comments (make sure your terminal supports italics)
   vim.g.codedark_italics=1
   --" Make the background transparent
-  vim.g.codedark_transparent=1
+  vim.g.codedark_transparent=0
 end
 
 ramen()

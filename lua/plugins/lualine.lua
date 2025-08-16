@@ -6,7 +6,7 @@ local M = {
 
 function M.config()
     local x1 = require 'user.lualine_themes' --kurang berguna untuk saat ini
-    local default_themes = require 'lualine.themes.powerline_dark'
+    local default_themes = require 'lualine.themes.auto'
 
     local hide_in_width = function()
       return vim.fn.winwidth(0) > 100
