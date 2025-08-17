@@ -6,7 +6,6 @@ local M = {
 
 function M.config()
     local x1 = require 'user.lualine_themes' --kurang berguna untuk saat ini
-    local default_themes = require 'lualine.themes.auto'
 
     local hide_in_width = function()
       return vim.fn.winwidth(0) > 100
@@ -64,7 +63,7 @@ function M.config()
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = default_themes,
+        theme = 'auto',
         section_separators = '',
         component_separators = '',
         disabled,iletypes = { 'alpha', 'neo-tree', 'Avante' },
