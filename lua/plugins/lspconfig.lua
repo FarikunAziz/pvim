@@ -8,23 +8,83 @@ local M = {
   },
 }
 
+local function lsp_keymaps(bufnr)
+  local opts = { noremap = true, silent = true }
+  local keymap = vim.api.nvim_buf_set_keymap
+  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+end
+
+ M.on_attach = function(client, bufnr)
+   lsp_keymaps(bufnr)
+
+   if client.supports_method("textDocument/inlayHint") then
+     vim.lsp.inlay_hint.enable(true, {
+       assignVariableTypes = true,
+       compositeLiteralFields = true,
+       compositeLiteralTypes = true,
+       constantValues = true,
+       functionTypeParameters = true,
+       parameterNames = true,
+       rangeVariableTypes = true,
+     })
+   end
+ end
+
+function M.common_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return capabilities
+end
+
+ M.toggle_inlay_hints = function()
+   local bufnr = vim.api.nvim_get_current_buf()
+   vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+ end
+
 function M.config()
-  vim.lsp.enable({
-    "clangd",
-    "ts_ls",
+  local wk = require "which-key"
+  wk.add {
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+    { "<leader>lf", "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>", desc = "Format" },
+    { "<leader>lh", "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
+    { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
+    { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
+    { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
+    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
+    { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+  }
+
+  local lspconfig = require "lspconfig"
+
+  local servers = {
+    "lua_ls",
     "cssls",
     "html",
+    "ts_ls",
+    "eslint",
+    "pyright",
+    "bashls",
     "jsonls",
-    "lua_ls",
-    "pyright"
-  })
+    "yamlls",
+    "clangd",
+  }
 
   vim.diagnostic.config({
     underline = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true,
     float = {
+      focusable = true,
+      style = "minimal",
       border = "rounded",
+      header = "",
+      prefix = "",
       source = true,
     },
     signs = {
@@ -41,59 +101,27 @@ function M.config()
     },
   })
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
-    callback = function(event)
-      local map = function(keys, func, desc)
-        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-      end
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  require("lspconfig.ui.windows").default_options.border = "rounded"
 
-      map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-      map("gh", vim.lsp.buf.hover, "Hover Documentation")
-      map("gi", vim.lsp.buf.implementation, "See implementation")
-      map("gd", vim.lsp.buf.definition, "Goto Definition")
-      map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-      map("<leader>la", vim.lsp.buf.code_action, "Code Action")
-      map("<leader>lr", vim.lsp.buf.rename, "Rename all references")
-      map("<leader>lf", vim.lsp.buf.format, "Format")
-      map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+  for _, server in pairs(servers) do
+    local opts = {
+      on_attach = M.on_attach,
+      capabilities = M.common_capabilities(),
+    }
 
-      local function client_supports_method(client, method, bufnr)
-        if vim.fn.has 'nvim-0.11' == 1 then
-          return client:supports_method(method, bufnr)
-        else
-          return client.supports_method(method, { bufnr = bufnr })
-        end
-      end
+    local require_ok, settings = pcall(require, "user.lspsettings." .. server)
+    if require_ok then
+      opts = vim.tbl_deep_extend("force", settings, opts)
+    end
 
-      local client = vim.lsp.get_client_by_id(event.data.client_id)
-      if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-        local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
+    if server == "lua_ls" then
+      require("lazydev").setup {}
+    end
 
-        -- When cursor stops moving: Highlights all instances of the symbol under the cursor
-        -- When cursor moves: Clears the highlighting
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-          buffer = event.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.document_highlight,
-        })
-        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-          buffer = event.buf,
-          group = highlight_augroup,
-          callback = vim.lsp.buf.clear_references,
-        })
-
-        -- When LSP detaches: Clears the highlighting
-        vim.api.nvim_create_autocmd('LspDetach', {
-          group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-          callback = function(event2)
-            vim.lsp.buf.clear_references()
-            vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
-          end,
-        })
-      end
-    end,
-  })
+    lspconfig[server].setup(opts)
+  end
 end
 
 return M

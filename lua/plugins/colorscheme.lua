@@ -4,7 +4,7 @@ sempak.lazy =  false
 sempak.priority = 1000
 
 --timpa colorscheme, matikan jika perlu
-sempak.name = "industry"
+sempak.name = "wildcharm"
 
 function sempak.config()
   local ok, _ = pcall(vim.cmd.colorscheme,sempak.name)
