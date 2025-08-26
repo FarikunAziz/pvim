@@ -18,6 +18,12 @@ function M.config()
       end,
     }
 
+    local space = {
+      function ()
+        return "⌥ : ".. vim.api.nvim_get_option_value('shiftwidth', {})
+      end
+    }
+
     local filename = {
       'filename',
       file_status = true,
@@ -60,21 +66,26 @@ function M.config()
       cond = hide_in_width,
     }
 
+    local time = {
+      "os.date('%H:%M')",
+      cond = hide_in_width,
+    }
+
     require('lualine').setup {
       options = {
         icons_enabled = true,
         theme = 'auto',
         section_separators = '',
         component_separators = '',
-        disabled,iletypes = { 'alpha', 'neo-tree', 'Avante' },
+        disabled,filetypes = { 'alpha', 'neo-tree', 'Avante' },
         always_divide_middle = true,
       },
       sections = {
         lualine_a = { mode },
         lualine_b = { 'branch' },
         lualine_c = { filename },
-        lualine_x = { diagnostics, diff, { "os.date('%H:%M')", cond = hide_in_width }},
-        lualine_y = {},
+        lualine_x = { diagnostics, diff, time},
+        lualine_y = {space},
         lualine_z = { 'progress' },
       },
       inactive_sections = {
