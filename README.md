@@ -25,11 +25,11 @@ nvim
 ├── README.md
 ├── init.lua
 ├── lazy-lock.json
+├── lsp
 └── lua
     ├── Lazy.lua
     ├── plugins
-    │   ├── lsp
-    │   ├── themes
+    │   ├── themes
     └── user
 ```
 
@@ -45,7 +45,6 @@ nvim
 - [x] folding
 - [x] gitsigns
 - [x] illuminate
-- [x] lspconfig
 - [x] lualine
 - [x] mason
 - [x] neoscroll
