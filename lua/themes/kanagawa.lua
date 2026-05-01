@@ -1,11 +1,3 @@
-local shinobi = {
-  "rebelot/kanagawa.nvim",
-  event = "InsertEnter"
-}
-
--- kanagawa-wave, kanagawa-dragon, kanagawa-lotus
-shinobi.name = "kanagawa"
-
 local colors = {
   -- Bg Shades
   sumiink0 = "#16161d",
@@ -133,8 +125,13 @@ local colors = {
   lotusCyan = "#d7e3d8",
 }
 
-function shinobi.tomo()
-  require('kanagawa').setup({
+local theme_plugin_name = "kanagawa"
+local colorscheme_name = "kanagawa"
+
+local ok, theme = pcall(require, theme_plugin_name)
+
+if ok and type(theme) == "table" and theme.setup then
+    theme.setup({
     compile = false,             -- enable compiling the colorscheme
     undercurl = true,            -- enable undercurls
     commentStyle = { italic = true },
@@ -477,4 +474,9 @@ function shinobi.tomo()
   })
 end
 
-return shinobi
+local success = pcall(vim.cmd, "colorscheme " .. colorscheme_name)
+
+if not success then
+    vim.cmd("colorscheme habamax")
+end
+

@@ -16,7 +16,7 @@ function M.config()
   }
 
   vim.cmd[[autocmd User AlphaReady echo 'Farikun Aziz']]
-  
+
   alpha.setup(startify.config)
 end
 

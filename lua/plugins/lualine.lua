@@ -1,12 +1,9 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  event = {"InsertEnter", "BufReadPre", "BufAdd", "BufNew", "BufReadPost" },
+  event = { "VeryLazy" }
 }
 
-
 function M.config()
-    local x1 = require 'user.lualine_themes' --kurang berguna untuk saat ini
-
     local hide_in_width = function()
       return vim.fn.winwidth(0) > 100
     end
@@ -41,7 +38,7 @@ function M.config()
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+      symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
       diagnostics_color = {
         error = {fg = '#8C1007'},
         warn  = {fg = '#FFC900'},
@@ -62,7 +59,7 @@ function M.config()
         modified = 'LuaLineDiffChange',
         removed  = 'LuaLineDiffDelete',
       },
-      symbols = { added = ' ', modified = ' ', removed = ' ' },
+      symbols = { added = ' ', modified = ' ', removed = ' ' },
       cond = hide_in_width,
     }
 
@@ -100,6 +97,5 @@ function M.config()
       extensions = { 'fugitive' },
     }
 end
-
 
 return M

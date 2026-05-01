@@ -1,6 +1,16 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
+  "nvim-lua/plenary.nvim",
+  dependencies = { 
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make"} 
+  },
+  event = 'VeryLazy',
+  keys = {
+    { "<leader>ff", desc = "Find files" },
+    { "<leader>ft", desc = "Find Text" },
+    { "<leader>fb", desc = "Buffers" },
+    { "<leader>fr", desc = "Recent File" },
+  }
 }
 
 function M.config()

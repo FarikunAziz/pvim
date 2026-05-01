@@ -45,6 +45,7 @@ local M = {
 function M.config()
   local cmp = require "cmp"
   local luasnip = require "luasnip"
+  local icon = require "user.icons"
   local s = luasnip.snippet
   local t = luasnip.text_node
   local i = luasnip.insert_node
@@ -117,15 +118,26 @@ function M.config()
     },
 
     formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. (strings[1] or "") .. " "
-      kind.menu = "    (" .. (strings[2] or "") .. ")"
+      fields = {"kind","abbr","menu"},
+      format = function(entry, vim_item)
+        local max_width = 50
+        if #vim_item.abbr > max_width then
+          vim_item.abbr = string.sub(vim_item.abbr,1,max_width) .. "..."
+        end
 
-      return kind
-    end,
+        -- Kind icons
+        vim_item.kind = string.format('%s %s', icon.kind[vim_item.kind], vim_item.kind)
+
+        vim_item.menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          nvim_lua = "[Lua]",
+          latex_symbols = "[LaTeX]",
+        })[entry.source.name]
+
+        return vim_item
+      end
   },
 
     sources = {
@@ -148,12 +160,13 @@ function M.config()
       completion = {
         border = "rounded",
         scrollbar = false,
-        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
         col_offset = -3,
         side_padding = 0,
       },
       documentation = {
         border = "rounded",
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
       },
     },
     experimental = {
@@ -163,6 +176,14 @@ function M.config()
       entries = {name = 'custom', selection_order = 'near_cursor' }
     },
   }
+
+  vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE", fg = "#C5CDD9" })
+  vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#45475a", fg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7E8294", strikethrough = true })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bold = true })
+  vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#C678DD" })
+  vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#C678DD" })
+  vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#E06C75" })
 end
 
 return M

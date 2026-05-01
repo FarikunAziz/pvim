@@ -17,13 +17,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     {import = "plugins"},
-    {import = "plugins.themes"},
   },
 
   install = {
     missing = true,
     colorscheme = {
-      require("plugins.colorscheme").name
+      "habamax"
     },
   },
 
@@ -33,7 +32,7 @@ require("lazy").setup({
   },
 
   change_detection = {
-    enabled = true,
+    enabled = false,
     notify = false,
   },
 })

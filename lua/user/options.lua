@@ -27,6 +27,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 2
+
 --its slowdown my terminator
 vim.opt.cursorline = false
 
@@ -35,8 +36,12 @@ vim.opt.laststatus = 4
 vim.opt.showcmd = false
 vim.opt.ruler = false
 vim.opt.numberwidth = 3
-vim.opt.foldmethod = "indent"
-vim.opt.signcolumn = "yes"
+
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 vim.opt.wrap = true
 vim.opt.scrolloff = 8
 
@@ -58,3 +63,27 @@ vim.opt.synmaxcol = 128
 vim.cmd([[
   syntax sync minlines=256
 ]])
+
+--coloring cmp
+-- gray
+vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
+-- blue
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
+vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
+-- light blue
+vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg='NONE', fg='#9CDCFE' })
+vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link='CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, 'CmpItemKindText', { link='CmpItemKindVariable' })
+-- pink
+vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg='NONE', fg='#C586C0' })
+vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link='CmpItemKindFunction' })
+-- front
+vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
+
+vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
+vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
+
+vim.filetype.add { extension = { tf = 'terraform' } }
+vim.filetype.add { extension = { tfvars = 'terraform' } }
+vim.filetype.add { extension = { pipeline = 'groovy' } }
+vim.filetype.add { extension = { multibranch = 'groovy' } }

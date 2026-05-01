@@ -2,13 +2,32 @@ local M = {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
 }
 
 function M.config()
   require("nvim-treesitter.configs").setup {
-    auto_install = true,
-    highlight = { enable = true },
+    ensure_installed = {
+      "lua", "bash", "cpp", "css", "html", "json", "python", "typescript", "javascript" 
+    },
+    sync_install = false,
+    auto_install = false,
+
+    highlight = {
+      enable = true,
+      disable = function(lang,buf)
+        local max_filesize = 100 * 1024
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+          return true
+        end
+      end
+    },
+
     indent = { enable = true },
+
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -21,9 +40,8 @@ function M.config()
     textobjects = {
       select = {
         enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true, 
         keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
           ['af'] = '@function.outer',
@@ -34,7 +52,7 @@ function M.config()
       },
       move = {
         enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
+        set_jumps = true, 
         goto_next_start = {
           [']m'] = '@function.outer',
           [']]'] = '@class.outer',
@@ -63,11 +81,6 @@ function M.config()
       },
     },
   }
-
-  -- Register additional file extensions
-  vim.filetype.add { extension = { tf = 'terraform' } }
-  vim.filetype.add { extension = { tfvars = 'terraform' } }
-  vim.filetype.add { extension = { pipeline = 'groovy' } }
-  vim.filetype.add { extension = { multibranch = 'groovy' } }
 end
+
 return M
