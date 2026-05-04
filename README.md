@@ -85,7 +85,7 @@ nvim
 - [x] alpha
 - [x] autopairs
 - [x] cmp
-- [x] color_highlight
+- [x] colorizer
 - [x] colorscheme
 - [x] comment
 - [x] devicons

@@ -1,3 +1,6 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.backup = false
 vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 vim.opt.cmdheight = 1

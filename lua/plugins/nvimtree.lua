@@ -1,19 +1,19 @@
 local M = {
   "nvim-tree/nvim-tree.lua",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  keys = {
+    {"<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer"},
+  },
 }
 
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 function M.config()
-  local wk = require "which-key"
+  -- local wk = require "which-key"
   local icons = require "user.icons"
 
-  wk.add {
-    { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" },
-  }
+  -- wk.add {
+  --   { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" },
+  -- }
 
   require("nvim-tree").setup {
     hijack_netrw = false,

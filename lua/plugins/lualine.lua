@@ -1,6 +1,7 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  event = { "VeryLazy" }
+  -- event = { "VeryLazy" }
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()
@@ -17,7 +18,7 @@ function M.config()
 
     local space = {
       function ()
-        return "⌥ : ".. vim.api.nvim_get_option_value('shiftwidth', {})
+        return "⌥ : ".. vim.opt.shiftwidth:get()
       end
     }
 
@@ -25,7 +26,7 @@ function M.config()
       'filename',
       file_status = true,
       path = 0,
-      newfile_statue = true,
+      newfile_status = true,
       symbols = {
         modified = '󰚼 ',
         readonly = ' ',
@@ -74,7 +75,7 @@ function M.config()
         theme = 'auto',
         section_separators = '',
         component_separators = '',
-        disabled,filetypes = { 'alpha', 'neo-tree', 'Avante' },
+        disabled_filetypes = { 'alpha', 'neo-tree', 'Avante' },
         always_divide_middle = true,
       },
       sections = {

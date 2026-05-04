@@ -1,7 +1,8 @@
 local T = {
   "folke/twilight.nvim",
-  lazy = true,
-  event = 'VeryLazy'
+  cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+  -- lazy = true,
+  -- event = 'VeryLazy'
 }
 
 function T.config()

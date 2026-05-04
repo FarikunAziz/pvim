@@ -1,6 +1,6 @@
 local M = {
   "karb94/neoscroll.nvim",
-   event = "VeryLazy",
+   event = {"BufReadPre","BufNewFile"},
 }
 
 -- default is : <C-u>, <C-d>, <C-b>, <C-f>, <C-y>, <C-e>, zt, zz, zb
