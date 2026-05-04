@@ -3,8 +3,9 @@ return {
     "Shatur/neovim-ayu",
     lazy = false,
     priority = 1000,
-    config = function()
+    init = function()
       require('themes.ayu')
+      return
     end,
   },
 
