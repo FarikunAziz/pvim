@@ -1,12 +1,8 @@
 return {
   {
     "Shatur/neovim-ayu",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      require('themes.ayu')
-      return
-    end,
+    lazy = true,
+    event = "VeryLazy",
   },
 
   {
@@ -29,8 +25,12 @@ return {
 
   {
     'bluz71/vim-moonfly-colors',
-    lazy = true,
-    event = 'VeryLazy',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('themes.moonfly')
+      return
+    end,
   },
 
   {

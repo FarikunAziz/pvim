@@ -4,22 +4,41 @@ local M = {
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   keys = {
     {"<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer"},
+    {"<leader>r", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh"},
   },
 }
 
 function M.config()
-  -- local wk = require "which-key"
   local icons = require "user.icons"
-
-  -- wk.add {
-  --   { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" },
-  -- }
 
   require("nvim-tree").setup {
     hijack_netrw = false,
     sync_root_with_cwd = true,
     view = {
       number = false,
+      relativenumber = false,
+       float = {
+        enable = true,
+        open_win_config = function()
+          local screen_w = vim.opt.columns:get()
+          local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+          local window_w = screen_w * 0.5
+          local window_h = screen_h * 0.7
+          local center_x = (screen_w - window_w) / 2
+          local center_y = (screen_h - window_h) / 2
+          return{
+            border = "rounded",
+            relative = "editor",
+            row = center_y,
+            col = center_x,
+            width = math.floor(window_w),
+            height = math.floor(window_h),
+          }
+      end
+      },
+      width = function()
+        return math.floor(vim.opt.columns:get() * 0.5)
+      end,
     },
     renderer = {
       add_trailing = false,
@@ -30,7 +49,7 @@ function M.config()
       root_folder_label = ":t",
       indent_width = 2,
       indent_markers = {
-        enable = false,
+        enable = true,
         inline_arrows = true,
         icons = {
           corner = "└",
