@@ -14,7 +14,7 @@ function M.config()
 	local icons = require("user.icons")
 
 	local servers = {
-		--tambahkan manual untuk clangd
+		--tambahkan manual untuk clangd {sizenya besar!}
 		"lua_ls",
 		"cssls",
 		"html",
@@ -22,7 +22,6 @@ function M.config()
 		"pyright",
 		"bashls",
 		"jsonls",
-		"clangd",
 	}
 
 	mason.setup({
