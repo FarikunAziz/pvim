@@ -47,6 +47,7 @@ nvim
 │   │   ├── double_cursor.lua
 │   │   ├── emmet.lua
 │   │   ├── folding.lua
+│   │   ├── format.lua
 │   │   ├── gitsigns.lua
 │   │   ├── illuminate.lua
 │   │   ├── lspconfig.lua
@@ -59,7 +60,6 @@ nvim
 │   │   ├── telescope.lua
 │   │   ├── toggleterm.lua
 │   │   ├── treesitter.lua
-│   │   ├── twilight.lua
 │   │   └── whichkey.lua
 │   ├── themes
 │   │   ├── ayu.lua
@@ -82,11 +82,13 @@ nvim
 ```
 
 ## plugins
+
 - [x] alpha
 - [x] autopairs
 - [x] cmp
 - [x] colorizer
 - [x] colorscheme
+- [x] conform
 - [x] comment
 - [x] devicons
 - [x] double_cursor
@@ -104,5 +106,4 @@ nvim
 - [x] telescope
 - [x] toggleterm
 - [x] treesitter
-- [x] twilight
 - [x] whichkey
