@@ -2,9 +2,11 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.opt.backup = false
-vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
+vim.schedule(function()
+	vim.opt.clipboard = "unnamedplus"
+end)
 vim.opt.cmdheight = 1
-vim.opt.completeopt = { "menuone", "noselect","noinsert"}
+vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.opt.conceallevel = 0
 vim.opt.fileencoding = "utf-8"
 vim.opt.hlsearch = true
@@ -26,10 +28,6 @@ vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.writebackup = false
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 2
 
 --its slowdown my terminator
 vim.opt.cursorline = false
@@ -40,7 +38,7 @@ vim.opt.showcmd = false
 vim.opt.ruler = false
 vim.opt.numberwidth = 3
 
-vim.opt.foldcolumn = '1'
+vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
@@ -51,13 +49,19 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"
 vim.opt.fillchars.eob = " "
-vim.opt.shortmess:append "c"
-vim.opt.whichwrap:append "<,>,[,],h,l"
-vim.opt.iskeyword:append "-"
-vim.opt.formatoptions:remove { "c", "r", "o" }
+vim.opt.shortmess:append("c")
+vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.iskeyword:append("-")
+vim.opt.formatoptions:remove({ "c", "r", "o" })
 vim.opt.linebreak = true
+
 vim.opt.list = true
 vim.opt.winborder = "solid"
+vim.opt.listchars:append("tab:  ")
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = -1
+vim.opt.tabstop = 2
 
 vim.opt.lazyredraw = true
 vim.opt.hidden = true
@@ -69,24 +73,24 @@ vim.cmd([[
 
 --coloring cmp
 -- gray
-vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
 -- blue
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
-vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link='CmpIntemAbbrMatch' })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpIntemAbbrMatch" })
 -- light blue
-vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { bg='NONE', fg='#9CDCFE' })
-vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { link='CmpItemKindVariable' })
-vim.api.nvim_set_hl(0, 'CmpItemKindText', { link='CmpItemKindVariable' })
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
 -- pink
-vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { bg='NONE', fg='#C586C0' })
-vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { link='CmpItemKindFunction' })
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
 -- front
-vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg='NONE', fg='#D4D4D4' })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
 
-vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link='CmpItemKindKeyword' })
-vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link='CmpItemKindKeyword' })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
 
-vim.filetype.add { extension = { tf = 'terraform' } }
-vim.filetype.add { extension = { tfvars = 'terraform' } }
-vim.filetype.add { extension = { pipeline = 'groovy' } }
-vim.filetype.add { extension = { multibranch = 'groovy' } }
+vim.filetype.add({ extension = { tf = "terraform" } })
+vim.filetype.add({ extension = { tfvars = "terraform" } })
+vim.filetype.add({ extension = { pipeline = "groovy" } })
+vim.filetype.add({ extension = { multibranch = "groovy" } })
