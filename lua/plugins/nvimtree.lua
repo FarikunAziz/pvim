@@ -4,7 +4,7 @@ local M = {
   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
   keys = {
     {"<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer"},
-    {"<leader>r", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh"},
+    {"<leader>r", "<cmd>NvimTreeRefresh<CR>", desc = "Refresh Explorer"},
   },
 }
 

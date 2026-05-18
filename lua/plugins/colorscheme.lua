@@ -29,14 +29,7 @@ return {
     priority = 1000,
     config = function()
       require('themes.moonfly')
-      return
     end,
-  },
-
-  {
-    'ChristianChiarulli/onedark.nvim',
-    lazy = true,
-    event = 'VeryLazy',
   },
 
   {
