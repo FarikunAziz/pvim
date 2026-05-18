@@ -40,7 +40,7 @@ nvim
      │   ├── alpha.lua
      │   ├── autopairs.lua
      │   ├── cmp.lua
-     │   ├── color_highlight.lua
+     │   ├── colorizer.lua
      │   ├── colorscheme.lua
      │   ├── comment.lua
      │   ├── devicons.lua
@@ -68,7 +68,6 @@ nvim
      │   ├── kanagawa.lua
      │   ├── melange.lua
      │   ├── moonfly.lua
-     │   ├── onedark.lua
      │   ├── papercolor.lua
      │   ├── spaceduck.lua
      │   ├── tokyonight.lua
