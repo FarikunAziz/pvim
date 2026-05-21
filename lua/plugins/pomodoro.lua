@@ -4,7 +4,7 @@ local M = {
   lazy = true,
   cmd = { "TimerStart", "TimerRepeat", "TimerSession", "TimerStop", "TimerPause", "TimerResume" },
   keys = {
-    { "<leader>pc4", "<cmd>TimerSession coding4<CR>", desc = "Pomodoro 30/10, 4x sessions" },
+    { "<leader>pc4", "<cmd>TimerSession coding4<CR>", desc = "Pomodoro 30/10n, 4x sessions" },
     { "<leader>pc2", "<cmd>TimerSession coding2<CR>", desc = "Pomodoro 50/10, 2x sessions" },
     { "<leader>pd", "<cmd>TimerSession pomodoro<CR>",  desc = "Pomodoro Default" },
     { "<leader>ps", "<cmd>TimerStop<CR>",            desc = "Hentikan Pomodoro" },
@@ -20,7 +20,7 @@ local M = {
 
 function M.config()
   local function play_sound(type)
-    local total_bip = 8
+    local total_bip = 5
     local tinggi_rendah_nada = 1500
     local panjang_bunyi = 300
     local jeda = 800
@@ -75,14 +75,14 @@ function M.config()
         {name = "Break 3", duration = "12m"},
 
         {name = "Coding 4", duration = "30m"},
-        {name = "Break 4", duration = "13m"},
+        -- {name = "Break 4", duration = "13m"},
       },
       coding2 = {
         { name = "Coding 1", duration = "50m" },
         { name = "Break 1", duration = "10m" },
 
         {name = "Coding 2", duration = "50m"},
-        {name = "Break 2", duration = "10m"},
+        -- {name = "Break 2", duration = "10m"},
       },
       pomodoro = {
         {name = "Fokus 1", duration = "25m"},
@@ -95,8 +95,8 @@ function M.config()
         {name = "Break 3", duration = "5m"},
 
         {name = "Fokus 4", duration = "25m"},
-        {name = "Break 4", duration = "7m"},
-        --pomodoro selesai
+        -- {name = "Break 4", duration = "7m"},
+        --pomodoro selesai, setelah sessions selesai tidak perlu lagi adanya BREAK karena setelah BREAK tidak akan ada lagi sessions, jadi user bebas mau lanjut atau istirahat lama
       }
     },
 

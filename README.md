@@ -6,19 +6,9 @@ My **PERSONAL** nvim config according to my needs
 
 ```bash
 git pull https://github.com/FarikunAziz/pvim.git
-
-#renaming
-mv pvim nvim
-
-#or create new one
-mkdir -p ~/.config/nvim
 ```
 
 ## structure
-
-```bash
-cd ~/.config/nvim
-```
 
 ```bash
 nvim

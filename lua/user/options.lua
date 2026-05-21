@@ -63,7 +63,8 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = -1
 vim.opt.tabstop = 2
 
-vim.opt.lazyredraw = true
+vim.opt.lazyredraw = false
+
 vim.opt.hidden = true
 vim.opt.history = 100
 vim.opt.synmaxcol = 128
