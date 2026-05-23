@@ -8,16 +8,16 @@ local M = {
 function M.config()
   local neoscroll = require('neoscroll')
    neoscroll.setup({
-       hide_cursor = true,          -- Hide cursor while scrolling
-       stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-       respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-       cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-       easing_function = "quadratic",       -- Default easing function
-       -- pre_hook = function(info) if info == "cursorline" then vim.wo.cursorline = false end end,
-       -- post_hook = function(info) if info == "cursorline" then vim.wo.cursorline = true end end,
+       hide_cursor = true,
+       stop_eof = true,
+       respect_scrolloff = false,
+       cursor_scrolls_alone = true,
+       easing_function = "quadratic",
+
+
        pre_hook = nil,
        post_hook = nil,
-       performance_mode = true,    -- Disable "Performance Mode" on all buffers.
+       performance_mode = true,
    })
 
   local keymap = {

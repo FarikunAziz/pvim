@@ -14,7 +14,6 @@ function M.config()
 	local icons = require("user.icons")
 
 	local servers = {
-		--tambahkan manual untuk clangd {sizenya besar!}
 		"lua_ls",
 		"cssls",
 		"html",
@@ -23,6 +22,48 @@ function M.config()
 		"bashls",
 		"jsonls",
 	}
+
+  local function check_clangd_installation()
+    local status_mason, mason_registry = pcall(require, "mason-registry")
+    if not status_mason then return end
+
+    if mason_registry.is_installed("clangd") then
+      table.insert(servers, "clangd")
+      return
+    end
+
+    local flag_path = vim.fn.stdpath("data") .. "/clangd_prompt_done"
+    if vim.fn.filereadable(flag_path) == 1 then
+      return
+    end
+
+    vim.schedule(function()
+      vim.ui.select({ "1. Yes (Install Sekarang)", "2. No (Install Nanti Manual)" }, {
+        prompt = "nvim mendeteksi clangd (C/C++) belum terpasang. Mau menginstalnya sekarang? [Ukuran file BESAR]:",
+      }, function(choice)
+          local file = io.open(flag_path, "w")
+          if file then file:close() end
+
+          if choice and choice:match("Yes") then
+            vim.notify("Mengunduh clangd via Mason... Mohon tunggu sebentar.", vim.log.levels.INFO)
+            vim.cmd("MasonInstall clangd")
+
+            table.insert(servers,"clangd")
+            vim.lsp.enable({"clangd"})
+
+            local status_lsp, lspconfig = pcall(require, "lspconfig")
+            if status_lsp and lspconfig.clangd then
+              lspconfig.clangd.setup({})
+            end
+
+          else
+            vim.notify("Instalasi clangd dilewati, ketik :Mason untuk install manual", vim.log.levels.WARN)
+          end
+        end)
+    end)
+  end
+
+  check_clangd_installation()
 
 	mason.setup({
 		ui = {
