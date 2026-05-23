@@ -47,7 +47,6 @@ nvim
      │   ├── nvim_notify.lua
      │   ├── nvimtree.lua
      │   ├── pomodoro.lua
-     │   ├── smear.lua
      │   ├── surround.lua
      │   ├── telescope.lua
      │   ├── toggleterm.lua
@@ -94,7 +93,6 @@ nvim
 - [x] nvim_notify
 - [x] nvimtree
 - [x] pomodoro
-- [x] smear
 - [x] surround
 - [x] telescope
 - [x] toggleterm
