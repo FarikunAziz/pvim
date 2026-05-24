@@ -5,7 +5,6 @@ local M = {
 }
 
 function M.config()
-  local toggleterm = require("toggleterm")
   local Terminal = require("toggleterm.terminal").Terminal
 
   local function compute_size(term)

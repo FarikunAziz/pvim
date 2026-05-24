@@ -38,6 +38,7 @@ nvim
      │   ├── emmet.lua
      │   ├── folding.lua
      │   ├── format.lua
+     │   ├── fzf.lua
      │   ├── gitsigns.lua
      │   ├── illuminate.lua
      │   ├── lspconfig.lua
@@ -48,7 +49,6 @@ nvim
      │   ├── nvimtree.lua
      │   ├── pomodoro.lua
      │   ├── surround.lua
-     │   ├── telescope.lua
      │   ├── toggleterm.lua
      │   ├── treesitter.lua
      │   └── whichkey.lua
@@ -66,35 +66,6 @@ nvim
          ├── autocmd.lua
          ├── icons.lua
          ├── keymaps.lua
-         ├── lualine_themes.lua
          ├── options.lua
          └── snippets.lua
 ```
-
-## plugins
-
-- [x] alpha
-- [x] autopairs
-- [x] cmp
-- [x] colorizer
-- [x] colorscheme
-- [x] conform
-- [x] comment
-- [x] devicons
-- [x] double_cursor
-- [x] emmet
-- [x] folding
-- [x] gitsigns
-- [x] illuminate
-- [x] lspconfig
-- [x] lualine
-- [x] neoscroll
-- [x] none_ls
-- [x] nvim_notify
-- [x] nvimtree
-- [x] pomodoro
-- [x] surround
-- [x] telescope
-- [x] toggleterm
-- [x] treesitter
-- [x] whichkey
