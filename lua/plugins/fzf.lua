@@ -22,6 +22,8 @@ end
 
 M.config = function()
   local fzf = require("fzf-lua")
+  local actions = fzf.actions
+
   fzf.setup({
     fzf_opts = {
       ["--layout"] = "reverse",
@@ -36,6 +38,16 @@ M.config = function()
         layout = "horizontal",
         vertical = "right:55%",
         border = "noborder"
+      },
+
+      on_close = function()
+        vim.cmd("redraw!")
+      end,
+    },
+
+    actions = {
+      files = {
+        ["default"] = actions.file_edit,
       },
     },
 
