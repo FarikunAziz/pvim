@@ -1,59 +1,87 @@
 local M = {
-  "ibhagwan/fzf-lua",
-  keys = {
-    { "<leader>bb", "<cmd>FzfLua buffers winopts={'preview':{'hidden':'hidden'}}<cr>", desc = "Find Buffer" },
-    { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
-    { "<leader>fb", "<cmd>FzfLua git_branches<cr>", desc = "Checkout branch" },
-    { "<leader>fc", "<cmd>FzfLua colorschemes<cr>", desc = "Colorscheme" },
-    { "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help" },
-    { "<leader>fl", "<cmd>FzfLua resume<cr>", desc = "Last Search" },
-    { "<leader>fp", "<cmd>FzfLua profiles<cr>", desc = "Projects" },
-    { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent File" },
-    { "<leader>ft", "<cmd>FzfLua live_grep_native<cr>", desc = "Find Text" },
-  },
+	"ibhagwan/fzf-lua",
+	keys = {
+		{ "<leader>fb", function() require("fzf-lua").buffers({ winopts = { preview = { hidden = "hidden" } } }) end, desc = "Find Buffer" },
+		{ "<leader>ff", function() require("fzf-lua").files() end, desc = "Find Files" },
+		{ "<leader>fr", function() require("fzf-lua").oldfiles() end, desc = "Recent File" },
+		{ "<leader>ft", function() require("fzf-lua").live_grep() end, desc = "Find Text" },
+
+		{ "<leader>fp", function() require("fzf-lua").profiles() end, desc = "Projects" },
+
+		{ "<leader>fh", function() require("fzf-lua").help_tags() end, desc = "Help" },
+		{ "<leader>fl", function() require("fzf-lua").resume() end, desc = "Last Search" },
+	},
 }
 
 M.init = function()
-  vim.ui.select = function(...)
-    require("fzf-lua").register_ui_select()
-    return vim.ui.select(...)
-  end
+	vim.ui.select = function(...)
+		require("fzf-lua").register_ui_select()
+		return vim.ui.select(...)
+	end
 end
 
 M.config = function()
-  local fzf = require("fzf-lua")
-  local actions = fzf.actions
+	local fzf = require("fzf-lua")
+	local actions = fzf.actions
 
-  fzf.setup({
-    fzf_opts = {
-      ["--layout"] = "reverse",
-      ["--info"] = "inline-right",
-    },
+	fzf.setup({
+    multiprocess = true,
 
-    winopts = {
-      height = 0.85,
-      width = 0.90,
-      border = "single",
-      preview = {
-        layout = "horizontal",
-        vertical = "right:55%",
-        border = "noborder"
+    --[caps off] -> matikan jika ingin fungsi capslock kembali menjadi seleksi
+    keymap = {
+      fzf = {
+        ["tab"] = "down",
+        ["shift-tab"] = "up",
       },
-
-      on_close = function()
-        vim.cmd("redraw!")
-      end,
     },
+
+    defaults = {
+			formatter = "path.filename_first",
+      file_icons = false,
+			git_icons = false,
+		},
+
+		fzf_opts = {
+			["--layout"] = "reverse",
+			["--info"] = "inline-right",
+      ["--pointer"] = "󱋴",
+		},
+
+		winopts = {
+			height = 0.85,
+			width = 0.90,
+			border = "single",
+
+      --[caps off]
+      fzf_cli_args = "--bind=tab:down,shift-tab:up",
+
+			preview = {
+				layout = "horizontal",
+				vertical = "right:55%",
+				border = "noborder",
+        winopts = {
+					number = false,
+					relativenumber = false,
+          signcolumn = "yes",
+				},
+			},
+
+			on_close = function()
+				vim.cmd("redraw!")
+			end,
+		},
 
     actions = {
       files = {
         ["default"] = actions.file_edit,
-      },
+      }
     },
 
-    files = { formatter = "path.filename_first" },
-  })
-
+    files = {
+      cwd_prompt = false,
+      prompt = 'Files>',
+    }
+	})
 end
 
 return M
