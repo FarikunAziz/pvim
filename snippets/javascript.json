@@ -1,0 +1,25 @@
+{
+  "Console Log": {
+    "prefix": "clog",
+    "body": [
+      "console.log($1);$0"
+    ],
+    "description": "Console log output"
+  },
+  
+  "Alert": {
+    "prefix": "al",
+    "body": [
+      "alert($1);$0"
+    ],
+    "description": "Browser alert dialog"
+  },
+  
+  "Console Info": {
+    "prefix": "ci",
+    "body": [
+      "console.info($1);$0"
+    ],
+    "description": "Console info output"
+  }
+}

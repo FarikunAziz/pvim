@@ -1,0 +1,18 @@
+{
+  "name": "custom-snippets",
+  "engines": {
+    "neovim": ">=0.10"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": ["javascript"],
+        "path": "./javascript.json"
+      },
+      {
+        "language": ["cpp"],
+        "path": "./cpp.json"
+      }
+    ]
+  }
+}

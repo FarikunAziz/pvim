@@ -4,6 +4,7 @@ local M = {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
+    "saghen/blink.cmp",
 	},
 }
 
@@ -22,6 +23,10 @@ function M.config()
 		"bashls",
 		"jsonls",
 	}
+
+  local capabilities = require("blink.cmp").get_lsp_capabilities()
+  local lsp_defaults = lspconfig.util.default_config
+	lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
 
   local function check_clangd_installation()
     local status_mason, mason_registry = pcall(require, "mason-registry")
