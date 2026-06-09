@@ -1,5 +1,8 @@
 local M = {
 	"saghen/blink.cmp",
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+  },
 	version = "*",
 	event = { "InsertEnter", "CmdlineEnter" },
 }
@@ -51,7 +54,8 @@ function M.config()
 							text = function(ctx)
 								local source_labels = {
 									lsp = "[LSP]",
-									snippets = "[LuaSnip]",
+									kustom   = " [Kustom]",
+									snippets = "[Friendly]",
 									buffer = "[Buffer]",
 									path = "[Path]",
 									cmdline = "[Cmdline]",
@@ -79,7 +83,26 @@ function M.config()
 		},
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "path", "kustom", "snippets", "buffer" },
+      providers = {
+        snippets = {
+					name = "snippets",
+					module = "blink.cmp.sources.snippets",
+					score_offset = 0,
+          opts = {
+						friendly_snippets = true,
+					},
+				},
+				kustom = {
+					name = "kustom",
+					module = "blink.cmp.sources.snippets",
+					score_offset = 100,
+					opts = {
+						search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+            include_global = false,
+					}
+				}
+			}
 		},
 
 		appearance = {

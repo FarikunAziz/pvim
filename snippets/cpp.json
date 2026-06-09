@@ -2,7 +2,7 @@
   "Standard Cout": {
     "prefix": "scout",
     "body": [
-      "std::cout << $1 << \"\\n\";$0"
+      "std::cout << $1 << $2 << \"\\n\";$0"
     ],
     "description": "standart c++ output dengan newline"
   }
