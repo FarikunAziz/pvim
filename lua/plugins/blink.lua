@@ -20,6 +20,7 @@ function M.config()
 			preset = "none",
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
+
 			["<CR>"] = { "accept", "fallback" },
 
 			["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -53,14 +54,16 @@ function M.config()
 						source_name = {
 							text = function(ctx)
 								local source_labels = {
-									lsp = "[LSP]",
-									kustom   = " [Kustom]",
-									snippets = "[Friendly]",
-									buffer = "[Buffer]",
-									path = "[Path]",
-									cmdline = "[Cmdline]",
+									lsp = "󱁇 LSP",
+									custom   = " Custom",
+									snippets = " Friendly",
+									buffer = " Buffer",
+									path = " Path",
+									cmdline = " Cmdline",
 								}
-								return source_labels[ctx.source_name] or "[" .. ctx.source_name .. "]"
+
+                local name = string.lower(ctx.source_name)
+                return source_labels[name] or ctx.source_name
 							end,
 							highlight = "BlinkCmpSource",
 						},
@@ -83,24 +86,25 @@ function M.config()
 		},
 
 		sources = {
-			default = { "lsp", "path", "kustom", "snippets", "buffer" },
+			default = { "lsp", "path", "custom", "snippets", "buffer" },
       providers = {
         snippets = {
 					name = "snippets",
 					module = "blink.cmp.sources.snippets",
-					score_offset = 0,
-          opts = {
+					score_offset = 10,
+					opts = {
 						friendly_snippets = true,
+						search_paths = {},
 					},
 				},
-				kustom = {
-					name = "kustom",
+				custom = {
+					name = "custom",
 					module = "blink.cmp.sources.snippets",
 					score_offset = 100,
 					opts = {
-						search_paths = { vim.fn.stdpath("config") .. "/snippets" },
-            include_global = false,
-					}
+						friendly_snippets = false,
+						search_paths = { vim.fn.stdpath("config") .. "/lua/user/my_snip" },
+					},
 				}
 			}
 		},
@@ -124,12 +128,14 @@ function M.config()
   }
 
   for _, kind in ipairs(kinds) do
-
     vim.api.nvim_set_hl(0, "BlinkCmpKind" .. kind, { link = "CmpItemKind" .. kind, default = true })
   end
 
   vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { link = "CmpItemAbbrMatch" })
   vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { fg = "#7E8294", strikethrough = true })
+
+  -- hapus sorotan snippet
+  vim.api.nvim_set_hl(0, "SnippetTabstop", { bg = "NONE", underline = false })
 
 end
 

@@ -1,0 +1,26 @@
+{
+  "standard Cout": {
+    "prefix": ["scout","co"],
+    "body": [
+      "std::cout << $1 << $2 << \"\\n\";$0"
+    ],
+    "description": "standart c++ output dengan newline"
+  },
+
+  "mersene twister":{
+    "prefix":["mt","rand","acak"],
+    "body":[
+      "std::mt19937 $1 {static_cast<std::mt19937::result_type>(std::time(nullptr))};$0"
+    ],
+    "description": "generate random number with advanced algorithm" 
+  },
+
+  "fast io without main":{
+    "prefix":["io","fastio"],
+    "body":[
+      "std::ios_base::sync_with_stdio(false);",
+      "std::cin.tie(nullptr);${0}"
+    ],
+    "description":"basic fast io to disconnect from printf"
+  }
+}
