@@ -7,7 +7,10 @@ vim.schedule(function()
 end)
 vim.opt.cmdheight = 1
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
-vim.opt.conceallevel = 0
+
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"
+
 vim.opt.fileencoding = "utf-8"
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true

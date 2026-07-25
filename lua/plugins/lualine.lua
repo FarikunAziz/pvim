@@ -21,6 +21,15 @@ function M.config()
 		end,
 	}
 
+  --hanya untuk markdown
+  local function get_words()
+    if vim.bo.filetype == "markdown" or vim.bo.filetype == "text" then
+      return tostring(vim.fn.wordcount().words) .. " words"
+    else
+      return ""
+    end
+  end
+
 	local filename = {
 		"filename",
 		file_status = true,
@@ -123,7 +132,7 @@ function M.config()
 		sections = {
 			lualine_a = { mode },
 			lualine_b = { "branch" },
-			lualine_c = { filename },
+			lualine_c = { filename , get_words},
 			lualine_x = { diagnostics, diff, "location" },
 			lualine_y = { "progress", time },
 			lualine_z = { pomo },

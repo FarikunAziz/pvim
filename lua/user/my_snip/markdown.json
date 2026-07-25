@@ -1,0 +1,37 @@
+{
+  "Bold Text": {
+    "prefix": "b",
+    "body": "**$1**$0",
+    "description": "Membuat teks tebal (Bold)"
+  },
+  "Italic Text": {
+    "prefix": "i",
+    "body": "_$1_$0",
+    "description": "Membuat teks miring (Italic)"
+  },
+  "Bold and Italic Text": {
+    "prefix": "bi",
+    "body": "***$1***$0",
+    "description": "Membuat teks tebal sekaligus miring"
+  },
+  "Underline Text (HTML)": {
+    "prefix": "u",
+    "body": "<u>$1</u>$0",
+    "description": "Membuat teks garis bawah (KaryaKarsa support HTML <u>)"
+  },
+  "Strikethrough Text": {
+    "prefix": "s",
+    "body": "~~$1~~$0",
+    "description": "Membuat teks coret (Strikethrough)"
+  },
+  "Markdown Link": {
+    "prefix": "link",
+    "body": "[$1]($2)$0",
+    "description": "Membuat link / tautan"
+  },
+  "Blockquote": {
+    "prefix": "bq",
+    "body": "> $1",
+    "description": "Membuat kutipan teks / blockquote"
+  }
+}

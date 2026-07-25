@@ -41,3 +41,15 @@ vim.api.nvim_create_user_command("Format", function(args)
 	end
 	require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
+
+--markdown
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "id"
+
+  vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, sp = "#80aaee" })
+  vim.api.nvim_set_hl(0, "SpellCap", { undercurl = true, sp = "#e0af68" })
+  end,
+})

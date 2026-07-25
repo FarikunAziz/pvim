@@ -43,6 +43,7 @@ nvim
     │   ├── illuminate.lua
     │   ├── lspconfig.lua
     │   ├── lualine.lua
+    │   ├── md_render.lua
     │   ├── neoscroll.lua
     │   ├── none_ls.lua
     │   ├── nvim_notify.lua
