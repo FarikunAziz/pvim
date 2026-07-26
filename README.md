@@ -15,7 +15,6 @@ nvim
 ├── README.md
 ├── init.lua
 ├── lazy-lock.json
-├── list.txt
 ├── lua
 │   ├── Lazy.lua
 │   ├── lsp
