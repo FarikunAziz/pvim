@@ -6,13 +6,18 @@
   "contributes": {
     "snippets": [
       {
-        "language": ["javascript"],
+        "language": "javascript",
         "path": "./javascript.json"
       },
       {
-        "language": ["cpp"],
+        "language": "cpp",
         "path": "./cpp.json"
+      },
+      {
+        "language": "markdown",
+        "path": "./markdown.json"
       }
     ]
   }
 }
+

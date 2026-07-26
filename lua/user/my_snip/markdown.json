@@ -27,11 +27,40 @@
   "Markdown Link": {
     "prefix": "link",
     "body": "[$1]($2)$0",
-    "description": "Membuat link / tautan"
+    "description": "Membuat link / tautan, bisa untuk gambar pula"
   },
   "Blockquote": {
     "prefix": "bq",
     "body": "> $1",
     "description": "Membuat kutipan teks / blockquote"
+  },
+  "Markdown Table 3x3": {
+    "prefix": "table3",
+    "body": [
+      "| ${1:Header 1} | ${2:Header 2} | ${3:Header 3} |",
+      "| :--- | :---: | ---: |",
+      "| ${4:Data 1}   | ${5:Data 2}   | ${6:Data 3}   |",
+      "| ${7:Data 4}   | ${8:Data 5}   | ${9:Data 6}   |",
+      "$0"
+    ],
+    "description": "Membuat tabel Markdown 3x3 otomatis dengan alignment lengkap"
+  },
+  "To-Do List Checkbox": {
+    "prefix": "todo",
+    "body": [
+      "- [ ] ${1:Tugas belum selesai}",
+      "- [x] ${2:Tugas sudah selesai}",
+      "$0"
+    ],
+    "description": "Membuat daftar To-Do List dengan checkbox kosong dan tercentang"
+  },
+  "GitHub Callout Alert": {
+    "prefix": "callout",
+    "body": [
+      "> [!${1|NOTE,TIP,IMPORTANT,WARNING,CAUTION|}]",
+      "> ${2:Tulis pesan atau informasi penting di sini.}",
+      "$0"
+    ],
+    "description": "Membuat kotak info/peringatan (Alert Box) standar GitHub Markdown"
   }
 }
