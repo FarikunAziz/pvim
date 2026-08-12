@@ -111,14 +111,23 @@ function M.config()
 		group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 		callback = function(ev)
 			local opts = { buffer = ev.buf }
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
-			vim.keymap.set(
-				"n",
-				"gl",
-				vim.diagnostic.open_float,
-				{ buffer = ev.buf, desc = "Show diagnostic error in float" }
-			)
+      local fzf = require("fzf-lua")
+
+      vim.keymap.set("n", "gd", fzf.lsp_definitions, opts)
+      vim.keymap.set("n", "gr", fzf.lsp_references, opts)
+      vim.keymap.set("n", "gi", fzf.lsp_implementations, opts)
+      vim.keymap.set("n", "gt", fzf.lsp_typedefs, opts)
+      vim.keymap.set("n", "gf", fzf.diagnostics_document, opts) 
+      vim.keymap.set("n","gl",vim.diagnostic.open_float, opts)
+      vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
+
+      vim.keymap.set("n", "<leader>gL", fzf.diagnostics_workspace, opts) 
+      vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols, opts)
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      vim.keymap.set({ "n", "v" }, "<leader>ca", fzf.lsp_code_actions, opts)
+
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 		end,
 	})
 end

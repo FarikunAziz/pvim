@@ -10,6 +10,17 @@ local M = {
 function M.config()
 	local icon = require("user.icons")
 
+  local source_labels = {
+    lsp      = "󱁇 LSP",
+    custom   = " Custom",
+    snippets = " Friendly",
+    buffer   = " Buffer",
+    path     = " Path",
+    cmdline  = " Cmdline",
+  }
+
+  local custom_snip_path = vim.fn.stdpath("config") .. "/lua/user/my_snip"
+
 	require("blink.cmp").setup({
 
 		snippets = {
@@ -31,6 +42,7 @@ function M.config()
 		},
 
 		completion = {
+      ghost_text = {enabled = false},
 			menu = {
 				border = "rounded",
 				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
@@ -53,17 +65,7 @@ function M.config()
 					components = {
 						source_name = {
 							text = function(ctx)
-								local source_labels = {
-									lsp = "󱁇 LSP",
-									custom   = " Custom",
-									snippets = " Friendly",
-									buffer = " Buffer",
-									path = " Path",
-									cmdline = " Cmdline",
-								}
-
-                local name = string.lower(ctx.source_name)
-                return source_labels[name] or ctx.source_name
+                return source_labels[string.lower(ctx.source_name)] or ctx.source_name
 							end,
 							highlight = "BlinkCmpSource",
 						},
@@ -73,7 +75,7 @@ function M.config()
 
 			documentation = {
 				auto_show = true,
-				auto_show_delay_ms = 200,
+				auto_show_delay_ms = 250,
 				window = {
 					border = "rounded",
 					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
@@ -103,7 +105,7 @@ function M.config()
 					score_offset = 100,
 					opts = {
 						friendly_snippets = false,
-						search_paths = { vim.fn.stdpath("config") .. "/lua/user/my_snip" },
+            search_paths = {custom_snip_path}
 					},
 				}
 			}
@@ -127,8 +129,8 @@ function M.config()
     "Keyword", "Snippet", "Color", "Reference", "Text", "Unit", "Value"
   }
 
-  for _, kind in ipairs(kinds) do
-    vim.api.nvim_set_hl(0, "BlinkCmpKind" .. kind, { link = "CmpItemKind" .. kind, default = true })
+  for i = 1, #kinds do
+    vim.api.nvim_set_hl(0, "BlinkCmpKind" .. kinds[i], { link = "CmpItemKind" .. kinds[i], default = true })
   end
 
   vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { link = "CmpItemAbbrMatch" })

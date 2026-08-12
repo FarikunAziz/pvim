@@ -11,7 +11,6 @@ git pull https://github.com/FarikunAziz/pvim.git
 ## structure
 
 ```bash
-nvim
 ├── README.md
 ├── init.lua
 ├── lazy-lock.json
@@ -56,7 +55,6 @@ nvim
 │   │   └── whichkey.lua
 │   ├── themes
 │   │   ├── ayu.lua
-│   │   ├── city.lua
 │   │   ├── kanagawa.lua
 │   │   ├── melange.lua
 │   │   ├── moonfly.lua
@@ -79,4 +77,5 @@ nvim
     ├── id.utf-8.add.spl
     ├── id.utf-8.spl
     └── id.utf-8.sug
+nvim
 ```

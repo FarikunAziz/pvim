@@ -6,12 +6,6 @@ return {
   },
 
   {
-    'zSnails/cityscape.nvim',
-    lazy = true,
-    event = "VeryLazy",
-  },
-
-  {
     'rebelot/kanagawa.nvim',
     lazy = true,
     event = 'VeryLazy',

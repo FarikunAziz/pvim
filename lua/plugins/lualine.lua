@@ -73,8 +73,9 @@ function M.config()
 	}
 
 	local time = {
-		"os.date('%H:%M')",
-		cond = hide_in_width,
+    function ()
+      return os.date('%H:%M')
+    end,
 	}
 
 	local pomo = function()
@@ -141,7 +142,7 @@ function M.config()
 			lualine_a = {},
 			lualine_b = {},
 			lualine_c = { { "filename", path = 1 } },
-			lualine_x = { { "location", padding = 0 } },
+			lualine_x = {},
 			lualine_y = { time },
 			lualine_z = {},
 		},
