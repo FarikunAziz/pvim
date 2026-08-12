@@ -73,9 +73,10 @@ git pull https://github.com/FarikunAziz/pvim.git
 │       │   └── package.json
 │       └── options.lua
 └── spell
+    ├── en.utf-8.add
+    ├── en.utf-8.add.spl
     ├── id.utf-8.add
     ├── id.utf-8.add.spl
     ├── id.utf-8.spl
     └── id.utf-8.sug
-nvim
 ```
