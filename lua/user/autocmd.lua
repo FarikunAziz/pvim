@@ -46,23 +46,23 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
 		vim.opt_local.spell = true
-		vim.opt_local.spelllang = "id"
+		vim.opt_local.spelllang = { "id", "en_us" }
 
-    vim.api.nvim_set_hl(0, "SpellBad", { fg = "#E63946", undercurl = true, sp = "#E63946" })
+		vim.api.nvim_set_hl(0, "SpellBad", { fg = "#E63946", undercurl = true, sp = "#E63946" })
 		vim.api.nvim_set_hl(0, "SpellCap", { fg = "#8B1E2D", undercurl = true, sp = "#8B1E2D" })
 
-    -- warna untuk tipe2 teks
-    -- 1. WARNA UNTUK TEKS BOLD (Tebal)
-    vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = "#FF9A00", bold = true })
+		-- warna untuk tipe2 teks
+		-- 1. WARNA UNTUK TEKS BOLD (Tebal)
+		vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = "#FF9A00", bold = true })
 
-    -- 2. WARNA UNTUK TEKS ITALIC (Miring)
-    vim.api.nvim_set_hl(0, "@markup.italic.markdown_inline", { fg = "#44A1A4", italic = true })
+		-- 2. WARNA UNTUK TEKS ITALIC (Miring)
+		vim.api.nvim_set_hl(0, "@markup.italic.markdown_inline", { fg = "#44A1A4", italic = true })
 
-    -- 3. WARNA UNTUK TEKS STRIKEOUT / STRIKETHROUGH (Coret)
-    vim.api.nvim_set_hl(0, "@markup.strikethrough.markdown_inline", { fg = "#325E6A", strikethrough = true })
+		-- 3. WARNA UNTUK TEKS STRIKEOUT / STRIKETHROUGH (Coret)
+		vim.api.nvim_set_hl(0, "@markup.strikethrough.markdown_inline", { fg = "#325E6A", strikethrough = true })
 
-    -- 4. superscript
-    vim.api.nvim_set_hl(0, "@markup.superscript.markdown_inline", { fg = "#73daca" })
+		-- 4. superscript
+		vim.api.nvim_set_hl(0, "@markup.superscript.markdown_inline", { fg = "#73daca" })
 	end,
 })
 vim.api.nvim_create_autocmd("FileType", {
@@ -153,9 +153,53 @@ vim.api.nvim_create_autocmd("FileType", {
 				end
 			end,
 		})
+	end,
+})
 
-    -- vim.opt_local.breakindent = true
-    -- vim.opt_local.breakindentopt = "min:20,shift:3"
-    -- vim.opt_local.wrap = true
+-- winbar
+local winbar_group = vim.api.nvim_create_augroup("EstetikWinbarOnly", { clear = true })
+
+vim.api.nvim_set_hl(0, "WinbarActive", { fg = "#165823", bg = "#bbbbbb", bold = true })
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "WinClosed" }, {
+	group = winbar_group,
+	callback = function()
+		vim.schedule(function()
+			-- 1. Hitung total window biasa (bukan floating)
+			local total_wins = 0
+			for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+				local config = vim.api.nvim_win_get_config(win)
+				if config.relative == "" then
+					total_wins = total_wins + 1
+				end
+			end
+
+			-- 2. Bersihkan winbar di SEMUA window
+			for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+				if vim.api.nvim_win_is_valid(win) then
+					vim.wo[win].winbar = nil
+				end
+			end
+
+			-- 3. Jika sedang split, pasang winbar estetik HANYA di window aktif
+			if total_wins > 2 then
+				local current_win = vim.api.nvim_get_current_win()
+				if vim.api.nvim_win_is_valid(current_win) then
+					local bufnr = vim.api.nvim_win_get_buf(current_win)
+					local filename = vim.fn.expand("#" .. bufnr .. ":t")
+					local file_modified = vim.api.nvim_get_option_value("modified", { buf = bufnr }) and " ●" or ""
+
+					-- Mencoba mengambil ikon file jika plugin nvim-web-devicons terinstal
+					local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+					local icon = ""
+					if has_devicons then
+						local ext = vim.fn.expand("#" .. bufnr .. ":e")
+						icon = devicons.get_icon(filename, ext, { default = true }) .. " "
+					end
+
+					vim.wo[current_win].winbar = "%#WinbarActive#  " .. icon .. filename .. file_modified .. " %*"
+				end
+			end
+		end)
 	end,
 })

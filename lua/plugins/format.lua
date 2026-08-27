@@ -17,7 +17,7 @@ function M.config()
 		},
 		formatters = {
 			["clang-format"] = {
-				prepend_args = { "--style={IndentWidth: 2}" },
+        prepend_args = { "--style={BasedOnStyle: Google, IndentWidth: 2, AccessModifierOffset: 0, PointerAlignment: Right}" },
 			},
 		},
 	})

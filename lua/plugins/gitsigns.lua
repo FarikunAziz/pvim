@@ -10,15 +10,17 @@ M.config = function()
   local wk = require "which-key"
   wk.add {
     { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer" },
-    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff" },
-    { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
-    { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
-    { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },
+    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git diffthis" },
+    { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame line" },
     { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk" },
     { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk" },
     { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk" },
     { "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = "Undo Stage Hunk" },
   }
+
+local keymap = vim.keymap.set
+keymap("n", "]c", "<cmd>Gitsigns next_hunk<CR>", { desc = "Lompat ke Baris Berikutnya" })
+keymap("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Lompat ke Baris Sebelumnya" })
 
   require("gitsigns").setup {
     signs = {

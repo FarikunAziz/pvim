@@ -10,6 +10,10 @@ local M = {
 
 		{ "<leader>fh", function() require("fzf-lua").help_tags() end, desc = "Help" },
 		{ "<leader>fl", function() require("fzf-lua").resume() end, desc = "Last Search" },
+
+    --git
+    { "<leader>fg", function() require("fzf-lua").git_status() end, desc = "Git Status (Cari File yang Berubah)" },
+    { "<leader>fc", function() require("fzf-lua").git_bcommits() end, desc = "Git Buffer Commits (Cari perubahan apa saja)" },
 	},
 }
 

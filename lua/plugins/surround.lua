@@ -25,8 +25,8 @@ return {
     vim.opt.timeoutlen = 2000
 
     local map = vim.keymap.set
-    map("n", "<leader>bi", "saiw?***<CR>***<CR>", { remap = true, silent = true, desc = "Wrap word in Bold Italic" })
-    map("n", "<leader>bo", "saiw?**<CR>**<CR>", { remap = true, silent = true, desc = "Wrap word in Bold" })
-    map("n", "<leader>i", "saiw_", { remap = true, silent = true, desc = "Wrap word in Italic" })
+    map("n", "<leader>tj", "saiw?***<CR>***<CR>", { remap = true, silent = true, desc = "Wrap word in Bold Italic" })
+    map("n", "<leader>tb", "saiw?**<CR>**<CR>", { remap = true, silent = true, desc = "Wrap word in Bold" })
+    map("n", "<leader>ti", "saiw_", { remap = true, silent = true, desc = "Wrap word in Italic" })
   end,
 }

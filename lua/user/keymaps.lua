@@ -52,12 +52,8 @@ keymap("i", "jj", "<ESC>", opts)
 keymap("i", "kk", "<ESC>", opts)
 
 --switch buffer
-keymap("n", "<leader>b", ":bn<CR>", opts)
-keymap("n", "<leader>p", ":bp<CR>", opts)
 keymap("n", "<S-l>", ":bn<CR>", opts)
 keymap("n", "<S-h>", ":bp<CR>", opts)
---select buffer
-keymap("n", "<leader>bl", ":buffers<CR>:buffer<Space>", opts)
 --quit buffer
 keymap("n","<s-q>",":bdelete<CR>",opts)
 
