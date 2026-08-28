@@ -5,7 +5,7 @@ My **PERSONAL** nvim config according to my needs
 ## usage
 
 ```bash
-git pull https://github.com/FarikunAziz/pvim.git
+git clone https://github.com/FarikunAziz/pvim.git
 ```
 
 ## structure
