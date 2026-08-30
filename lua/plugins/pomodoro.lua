@@ -43,7 +43,7 @@ function M.config()
       if type == "start" then
         cmd = "afplay /System/Library/Sounds/Tink.aiff"
       elseif type == "done" then
-        cmd = strng.format("for i in {1..%d}; do afplay /System/Library/Sounds/Hero.aiff; sleep %.2f; done",total_bip,jeda / 1000)
+        cmd = string.format("for i in {1..%d}; do afplay /System/Library/Sounds/Hero.aiff; sleep %.2f; done",total_bip,jeda / 1000)
       elseif type == "stop" then
         cmd = "afplay /System/Library/Sounds/Basso.aiff"
       end
@@ -52,11 +52,11 @@ function M.config()
     else
       local cmd = ""
       if type == "start" then
-        cmd = "aplay /usr/share/sounds/alsa/Front_Center.wav >/dev/null 2>&1"
+        cmd = "mpv --volume=150 /usr/share/sounds/alsa/Front_Center.wav >/dev/null 2>&1"
       elseif type == "done" then
-        cmd = string.format("for i in $(seq 1 %d); do aplay /usr/share/sounds/alsa/Front_Center.wav >/dev/null 2>&1; sleep %.2f; done",total_bip,jeda/1000)
+        cmd = string.format("for i in $(seq 1 %d); do mpv --volume=150 /usr/share/sounds/alsa/Front_Center.wav >/dev/null 2>&1; sleep %.2f; done",total_bip,jeda/1000)
       elseif type == "stop" then
-        cmd = "aplay /usr/share/sounds/alsa/Side_Left.wav >/dev/null 2>&1"
+        cmd = "mpv --volume=150 /usr/share/sounds/alsa/Side_Left.wav >/dev/null 2>&1"
       end
       vim.fn.jobstart({"sh", "-c", cmd}, {detach = true})
     end

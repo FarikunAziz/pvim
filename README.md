@@ -8,6 +8,13 @@ My **PERSONAL** nvim config according to my needs
 git clone https://github.com/FarikunAziz/pvim.git
 ```
 
+I'm using **mpv** to play notif from pomodoro.lua, make sure you already have it
+```bash
+sudo apt install mpv
+sudo dnf install mpv -y
+sudo pacman -S mpv
+``` 
+
 ## structure
 
 ```bash

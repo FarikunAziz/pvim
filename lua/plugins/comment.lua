@@ -16,7 +16,19 @@ function M.config()
   }
 
   require("Comment").setup {
-    pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+    pre_hook = function (ctx)
+      if vim.bo.filetype == "cmake" then
+        return "# %s"
+      end
+
+      local status, ts_comment = pcall(function ()
+        return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()(ctx)
+      end)
+
+      if status and ts_comment then
+        return ts_comment
+      end
+    end
   }
 
   local wk = require "which-key"
